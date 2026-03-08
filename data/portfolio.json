@@ -6,7 +6,7 @@
     "email": "jellyannekayemallari@gmail.com",
     "github": "https://github.com/jelliness",
     "linkedin": "https://www.linkedin.com/in/jak-mallari",
-    "resumeUrl": "https://yourdomain.com/resume.pdf",
+    "resumeUrl": "https://drive.google.com/file/d/1-sTO6oNNTrdTcHzfrL_-ogXRtfLz-Cd1/view?usp=sharing",
     "bio": "I am passionate about software development, data engineering, and web technologies. With a strong foundation in programming and data management, I've built full-stack applications, designed scalable systems, and contributed to research-driven and sustainability-focused digital solutions.",
     "location": "Laguna, Philippines",
     "available": true
@@ -36,12 +36,12 @@
       "title": "Portfolio Website",
       "category": "Web Development",
       "description": "A modern, responsive portfolio website built with React and featuring dark/light mode toggle, animated starfield background, and clean design. Showcases projects, skills, and achievements with smooth animations and user-friendly navigation.",
-      "tech": ["React", "CSS3", "JavaScript", "Vite"],
+      "tech": ["JavaScript", "CSS", "HTML"],
       "status": "Completed",
       "year": 2025,
       "featured": false,
       "github": null,
-      "demo": "https://jelliness.github.io/web-portfolio/",
+      "demo": "https://jelly-mallari.vercel.app/",
       "image": "https://pbs.twimg.com/media/GveI5yIakAEieed?format=jpg&name=large"
     },
     {

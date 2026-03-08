@@ -108,8 +108,8 @@
               ${UI.esc(p.status)} · ${p.year}
             </div>
             <div class="project-links">
-              ${p.github && p.github !== '#' ? `<a href="${p.github}" target="_blank">GitHub ↗</a>` : `<a href="#">GitHub ↗</a>`}
-              ${p.demo && p.demo !== '#' ? `<a href="${p.demo}" target="_blank">Demo ↗</a>` : `<a href="#">Demo ↗</a>`}
+              ${p.github && p.github !== '#' && p.github !== null && p.github !== 'null' ? `<a href="${UI.esc(p.github)}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>` : ''}
+              ${p.demo && p.demo !== '#' && p.demo !== null && p.demo !== 'null' ? `<a href="${UI.esc(p.demo)}" target="_blank" rel="noopener noreferrer">Demo ↗</a>` : ''}
             </div>
           </div>
         </div>
