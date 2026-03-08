@@ -64,6 +64,8 @@
       const nav = document.getElementById('main-nav');
       if (nav) nav.style.background = window.scrollY > 40 ? 'rgba(4,5,13,0.95)' : 'rgba(4,5,13,0.7)';
     });
+    // Re-attach contact triggers after navbar is inserted
+    ContactForm.attachTriggers();
 
     DataStore.getSection('experience').then(experience => {
       const container = document.getElementById('timeline-container');

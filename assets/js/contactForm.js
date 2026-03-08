@@ -133,10 +133,7 @@ const ContactForm = (() => {
     formStatus.textContent = '';
     
     try {
-      // Using Formspree (free service)
-      // Sign up at https://formspree.io/ and replace YOUR_FORM_ID below with your actual form ID
-      // Example: https://formspree.io/f/xwpkdngl
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('https://formspree.io/f/mlgpdyrb', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
