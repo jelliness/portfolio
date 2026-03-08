@@ -106,6 +106,29 @@ import ContactForm from './assets/js/contactForm.js';
 /* ══════════════════════════════════════════════
    HELPERS
 ══════════════════════════════════════════════ */
+function calculateExperience() {
+  const startDate = new Date('2025-04-01'); // April 2025
+  const now = new Date();
+  
+  const years = now.getFullYear() - startDate.getFullYear();
+  const months = now.getMonth() - startDate.getMonth();
+  
+  let totalYears = years;
+  let totalMonths = months;
+  
+  if (totalMonths < 0) {
+    totalYears--;
+    totalMonths += 12;
+  }
+  
+  // Format: minimum is 1, show + for additional months beyond complete years
+  if (totalYears === 0) {
+    return '1'; // First year always shows as 1
+  }
+  
+  return totalMonths > 0 ? `${totalYears + 1}+` : `${totalYears + 1}`;
+}
+
 function ticker(items, dur = '22s') {
   const inner = items.join('');
   return `<div class="ticker-wrap"><div class="ticker-track" style="--tdur:${dur}">${inner}${inner}</div></div>`;
@@ -152,6 +175,9 @@ async function render() {
     ...(skills.databases  || []).slice(0, 3),
     ...(skills.tools      || []).slice(0, 3)
   ];
+
+  // Calculate dynamic experience
+  const experienceYears = calculateExperience();
 
   // Extract profile data with fallbacks
   const profileName = profile?.name || 'Jelly Anne Kaye Mallari';
@@ -234,7 +260,7 @@ async function render() {
           <div class="tile-title">Experience</div>
           <div class="tile-sub">Years of growth</div>
         </div>
-        ${numOrbit(stats.experience)}
+        ${numOrbit(experienceYears)}
       </div>
       ${ticker(experience.map(expItem), '20s')}
       ${ARR}

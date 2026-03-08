@@ -68,7 +68,7 @@
     DataStore.getSection('blogs').then(blogs => {
       const grid = document.getElementById('blog-grid');
       grid.innerHTML = (blogs || []).map((b, i) => `
-        <a href="${b.url || '#'}" class="blog-card reveal" style="transition-delay:${i * 0.1}s;display:block">
+        <a href="blog-detail.html?id=${b.id}" class="blog-card reveal" style="transition-delay:${i * 0.1}s;display:block;text-decoration:none;cursor:pointer;">
           <div class="blog-category">${UI.esc(b.category)}</div>
           <h3 class="blog-title">${UI.esc(b.title)}</h3>
           <p class="blog-excerpt">${UI.esc(b.excerpt)}</p>

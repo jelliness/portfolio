@@ -1,210 +1,321 @@
 {
   "profile": {
     "name": "Jelly Anne Kaye Mallari",
-    "title": "Developer & Data Analyst",
+    "title": "Data Engineer / Data Analyst",
     "tagline": "Turning data into stories, code into experiences.",
-    "email": "jellyannekaymallari@email.com",
-    "github": "https://github.com/jellymallari",
-    "linkedin": "https://linkedin.com/in/jellymallari",
-    "resumeUrl": "#",
-    "bio": "I'm a developer and data analyst passionate about building elegant digital solutions and uncovering insights from complex datasets. I bridge the gap between engineering and analytics—creating systems that are as insightful as they are functional.",
-    "location": "Philippines",
+    "email": "jellyannekayemallari@gmail.com",
+    "github": "https://github.com/jelliness",
+    "linkedin": "https://www.linkedin.com/in/jak-mallari",
+    "resumeUrl": "https://yourdomain.com/resume.pdf",
+    "bio": "I am passionate about software development, data engineering, and web technologies. With a strong foundation in programming and data management, I've built full-stack applications, designed scalable systems, and contributed to research-driven and sustainability-focused digital solutions.",
+    "location": "Laguna, Philippines",
     "available": true
   },
   "stats": {
-    "projects": 18,
-    "experience": 4,
-    "technologies": 24,
-    "blogs": 12
+    "projects": 7,
+    "experience": 2,
+    "technologies": 20,
+    "blogs": 3
   },
   "projects": [
     {
       "id": "p1",
-      "title": "Stellar Analytics Dashboard",
-      "category": "Data Analytics",
-      "description": "An interactive dashboard for visualizing large-scale astronomical datasets using D3.js and Python. Processes over 1M data points in real-time.",
-      "tech": ["Python", "D3.js", "PostgreSQL", "FastAPI"],
+      "title": "Poppix",
+      "category": "Web Development",
+      "description": "A retro-inspired photobooth that lets you capture fun, stylish moments in instantly shareable photo strips and collages.",
+      "tech": ["React", "CSS", "JavaScript", "Vite"],
       "status": "Completed",
-      "year": 2024,
+      "year": 2025,
       "featured": true,
-      "github": "#",
-      "demo": "#",
-      "image": ""
+      "github": null,
+      "demo": "https://jelliness.github.io/Poppix/",
+      "image": "https://pbs.twimg.com/media/Gvhn7gVakAU8kDl?format=jpg&name=small"
     },
     {
       "id": "p2",
-      "title": "NLP Sentiment Pipeline",
-      "category": "Machine Learning",
-      "description": "End-to-end NLP pipeline for real-time social media sentiment analysis. Achieved 94% accuracy using fine-tuned transformer models.",
-      "tech": ["Python", "HuggingFace", "Kafka", "Docker"],
+      "title": "Portfolio Website",
+      "category": "Web Development",
+      "description": "A modern, responsive portfolio website built with React and featuring dark/light mode toggle, animated starfield background, and clean design. Showcases projects, skills, and achievements with smooth animations and user-friendly navigation.",
+      "tech": ["React", "CSS3", "JavaScript", "Vite"],
       "status": "Completed",
-      "year": 2024,
-      "featured": true,
-      "github": "#",
-      "demo": "#",
-      "image": ""
+      "year": 2025,
+      "featured": false,
+      "github": null,
+      "demo": "https://jelliness.github.io/web-portfolio/",
+      "image": "https://pbs.twimg.com/media/GveI5yIakAEieed?format=jpg&name=large"
     },
     {
       "id": "p3",
-      "title": "DevTrack — Task Manager",
+      "title": "ESGDash",
       "category": "Web Development",
-      "description": "Full-stack project management tool with real-time collaboration features, built for development teams.",
-      "tech": ["Node.js", "React", "MongoDB", "Socket.io"],
-      "status": "In Progress",
-      "year": 2024,
-      "featured": false,
-      "github": "#",
-      "demo": "#",
-      "image": ""
+      "description": "A web-based ESG data dashboard developed for PetroEnergy Resources Corp., designed to monitor environmental, social, and governance metrics. The system includes frontend dashboards, backend API services, and a medallion data architecture for streamlined reporting.",
+      "tech": ["React", "FastAPI", "PostgreSQL", "Vite", "Material UI"],
+      "status": "Completed",
+      "year": 2025,
+      "featured": true,
+      "github": "https://github.com/ThatOneLeaf/PetroDash-WEB",
+      "demo": null,
+      "image": "https://pbs.twimg.com/media/GvfuQQUXkAECXNA?format=jpg&name=large"
     },
     {
       "id": "p4",
-      "title": "Supply Chain Optimizer",
-      "category": "Data Analytics",
-      "description": "ML-powered supply chain optimization tool that reduced operational costs by 23% for a logistics company.",
-      "tech": ["Python", "scikit-learn", "Tableau", "SQL"],
+      "title": "ESG Data Management",
+      "category": "Data Engineering",
+      "description": "A structured ESG data warehousing solution for PetroEnergy Resources Corp. using Medallion Architecture (Bronze, Silver, Gold layers) to organize raw data into analytics-ready formats for governance and sustainability reporting.",
+      "tech": ["PostgreSQL", "Medallion Architecture", "Data Warehousing"],
       "status": "Completed",
-      "year": 2023,
+      "year": 2025,
       "featured": true,
-      "github": "#",
-      "demo": "#",
-      "image": ""
+      "github": "https://github.com/jelliness/PetroEnergy_DataWarehousing",
+      "demo": null,
+      "image": "https://pbs.twimg.com/media/GvfwezPW8AEyu_f?format=jpg&name=large"
     },
     {
       "id": "p5",
-      "title": "Galaxia — Portfolio Template",
+      "title": "Institutional Research Repository System",
       "category": "Web Development",
-      "description": "Open-source space-themed portfolio template with modular architecture and admin panel.",
-      "tech": ["HTML", "CSS", "JavaScript"],
+      "description": "An institutional platform for storing, integrating, and analyzing research data. The system utilizes knowledge graphs for semantic analysis and supports advanced filtering, tagging, and data relationships visualization.",
+      "tech": ["Flask", "React", "Material UI", "Plotly Dash", "PostgreSQL"],
       "status": "Completed",
-      "year": 2023,
-      "featured": false,
-      "github": "#",
-      "demo": "#",
-      "image": ""
+      "year": 2024,
+      "featured": true,
+      "github": null,
+      "demo": "https://mmcl-researchrepository.com/",
+      "image": "https://pbs.twimg.com/media/GveL4a7aYAAEJSE?format=jpg&name=large"
     },
     {
       "id": "p6",
-      "title": "Weather Pattern Predictor",
-      "category": "Machine Learning",
-      "description": "LSTM-based model predicting regional weather patterns 7 days ahead with 88% accuracy.",
-      "tech": ["TensorFlow", "Python", "Pandas", "Plotly"],
+      "title": "Final Revelation",
+      "category": "Game Development",
+      "description": "A mystery-horror game where players take on the role of a detective solving a case behind multiple deaths in an eerie location. Features puzzle-solving, maze-like levels, and encounters with supernatural entities while uncovering clues.",
+      "tech": ["C#", "Unity", "MySQL"],
       "status": "Completed",
-      "year": 2023,
+      "year": 2024,
       "featured": false,
-      "github": "#",
-      "demo": "#",
-      "image": ""
+      "github": "https://github.com/jelliness/Final_Revelation_Game",
+      "demo": null,
+      "image": "https://pbs.twimg.com/media/GvgDRDGXUAA73n6?format=jpg&name=large"
+    },
+    {
+      "id": "p7",
+      "title": "Analyzing Boston Housing Data",
+      "category": "Data Analytics",
+      "description": "A data science project analyzing the Boston Housing dataset, completed as part of the IBM Statistics for Data Science with Python course on Coursera. Involves exploratory data analysis, visualization, and statistical modeling.",
+      "tech": ["Python", "Pandas", "Matplotlib", "Seaborn"],
+      "status": "Completed",
+      "year": 2024,
+      "featured": false,
+      "github": "https://github.com/jelliness/boston_housing_data",
+      "demo": null,
+      "image": "https://miro.medium.com/v2/resize:fit:1000/1*FHQOSHMMT07CbXpklk1Ehw.jpeg"
     }
   ],
   "experience": [
     {
       "id": "e1",
-      "role": "Data Analyst",
-      "company": "TechCorp Solutions",
-      "period": "2023 – Present",
+      "role": "Junior Data Engineer",
+      "company": "Media Meter Inc.",
+      "period": "Dec 2025 – Present",
       "type": "Full-time",
-      "description": "Lead data analyst responsible for building ETL pipelines, dashboards, and predictive models for business intelligence.",
+      "location": "Quezon City, Metro Manila",
+      "description": "Designing and deploying AI-powered data pipelines and microservices with a focus on automation, LLM orchestration, and real-time message brokering.",
       "highlights": [
-        "Built automated reporting system saving 20 hrs/week",
-        "Designed ML model improving customer retention by 15%",
-        "Led team of 3 junior analysts"
+        "Designed and deployed a distributed research microservice using a Redis publisher-consumer architecture, reducing manual research turnaround time by ~70% through fully automated, event-driven job execution",
+        "Built a production agentic workflow enabling dynamic, chat-based editing of AI-generated data outputs — cutting post-generation correction time by ~50% and improving structured data accuracy across iterative LLM calls",
+        "Engineered scalable, decoupled AI pipelines integrating real-time message brokering and LLM orchestration, supporting concurrent job processing across multiple data streams with zero cross-job interference"
       ]
     },
     {
       "id": "e2",
-      "role": "Junior Web Developer",
-      "company": "Pixel Labs",
-      "period": "2022 – 2023",
-      "type": "Full-time",
-      "description": "Developed and maintained full-stack web applications for SME clients across various industries.",
+      "role": "Full Stack Developer · Project Lead",
+      "company": "PetroEnergy Resources Corporation",
+      "period": "Apr 2025 – Oct 2025",
+      "type": "Internship & Part-time Full Stack Developer",
+      "location": "Pasig City, Metro Manila",
+      "description": "Led a team of developers to deliver an enterprise ESG data management platform end-to-end, launching a production-ready system in 7 months.",
       "highlights": [
-        "Delivered 12+ client projects on schedule",
-        "Reduced load times by 40% via optimization",
-        "Introduced component-based architecture"
-      ]
-    },
-    {
-      "id": "e3",
-      "role": "Data Science Intern",
-      "company": "Analytics Hub",
-      "period": "2021 – 2022",
-      "type": "Internship",
-      "description": "Assisted senior data scientists in building models and cleaning large datasets for enterprise clients.",
-      "highlights": [
-        "Processed 500K+ rows of customer data",
-        "Built 3 predictive models from scratch",
-        "Authored internal documentation"
+        "Architected a Medallion Architecture (Bronze → Silver → Gold) data warehouse with automated ELT pipelines, consolidating datasets from 5+ departments and cutting reporting cycles from weeks to days (~65% time savings)",
+        "Engineered RESTful APIs, role-based authentication, and data validation scripts using FastAPI and PostgreSQL, achieving zero critical data integrity incidents across multiple user access levels post-launch",
+        "Designed 5+ real-time self-serve analytics dashboards, eliminating ad-hoc reporting requests and enabling executives to access live metrics independently",
+        "Translated business requirements into technical specs in direct collaboration with executives, accelerating the approval cycle by 25% and ensuring on-schedule deployment",
+        "Ran Agile Scrum bi-weekly sprints with CI/CD pipelines, maintaining 100% sprint delivery rate through both project phases"
       ]
     }
   ],
   "skills": {
-    "languages": ["Python", "JavaScript", "SQL", "TypeScript", "R", "Bash"],
-    "frameworks": ["Node.js", "FastAPI", "Flask", "Express.js", "D3.js"],
-    "data": ["Pandas", "NumPy", "scikit-learn", "TensorFlow", "Tableau", "Power BI"],
-    "databases": ["PostgreSQL", "MongoDB", "MySQL", "Redis"],
-    "tools": ["Docker", "Git", "Linux", "Figma", "Jupyter", "VS Code"]
+    "languages": ["Python", "JavaScript", "SQL", "C#"],
+    "frameworks": ["React", "FastAPI", "Flask", "Vite"],
+    "data": ["PostgreSQL", "MS SQL Server", "MySQL", "Redis", "Medallion Architecture", "Data Warehousing"],
+    "tools": ["Git", "Notion", "Material UI", "Agile/Scrum", "Unity"],
+    "other": ["HTML5", "CSS3", "RESTful APIs", "ETL Pipelines", "Knowledge Graphs"]
   },
+  "achievements": [
+    {
+      "type": "Badge",
+      "title": "Google Project Management Professional Certificate",
+      "issuer": "Coursera",
+      "date": "June 2025",
+      "link": "https://www.credly.com/badges/1f8c9531-898c-496e-91a7-f4364412903c/public_url"
+    },
+    {
+      "type": "Certificate",
+      "title": "Version Control",
+      "issuer": "Meta",
+      "date": "June 2025",
+      "link": "https://coursera.org/share/b994e519989ffb324cce8ed2ce468879"
+    },
+    {
+      "type": "Certificate",
+      "title": "Programming with JavaScript",
+      "issuer": "Meta",
+      "date": "June 2025",
+      "link": "https://coursera.org/share/05914928e70c7e5f80638bfab03fef6c"
+    },
+    {
+      "type": "Certificate",
+      "title": "Capstone: Applying Project Management in the Real World",
+      "issuer": "Google",
+      "date": "June 2025",
+      "link": "https://coursera.org/share/5ea56b6bcc476416419778868980b6a1"
+    },
+    {
+      "type": "Seminar/Workshop",
+      "title": "Build with AI Manila 2025",
+      "issuer": "Google Developers Group",
+      "date": "May 2025",
+      "link": "https://developers.google.com/profile/u/jelliness"
+    },
+    {
+      "type": "Certificate",
+      "title": "Create a Project Charter with Google Docs",
+      "issuer": "Coursera Project Network",
+      "date": "May 2025",
+      "link": "https://coursera.org/share/2e843c1a3d44ef45f7162309da706432"
+    },
+    {
+      "type": "Certificate",
+      "title": "Build a free website with WordPress",
+      "issuer": "Coursera Project Network",
+      "date": "April 2025",
+      "link": "https://coursera.org/share/0eaea4b14dc99175acafe489dc90b838"
+    },
+    {
+      "type": "Certificate",
+      "title": "Foundations of Project Management",
+      "issuer": "Google",
+      "date": "April 2025",
+      "link": "https://coursera.org/share/3976541333881631bd374e22bcaeb25f"
+    },
+    {
+      "type": "Certificate",
+      "title": "Project Planning: Putting It All Together",
+      "issuer": "Google",
+      "date": "April 2025",
+      "link": "https://coursera.org/share/1c15918edd25766b8a123fa80d833917"
+    },
+    {
+      "type": "Certificate",
+      "title": "Agile Project Management",
+      "issuer": "Google",
+      "date": "April 2025",
+      "link": "https://coursera.org/share/6b85223099cbccfa83f4567a41ea1333"
+    },
+    {
+      "type": "Badge",
+      "title": "Generative AI and Prompt Engineering Basics",
+      "issuer": "DICT with Coursera",
+      "date": "December 2024",
+      "link": "https://www.credly.com/badges/37aabffd-9dc4-445e-9b40-e844c0d50bbb/public_url"
+    },
+    {
+      "type": "Badge",
+      "title": "Data Science (Beginner)",
+      "issuer": "DICT with Coursera",
+      "date": "December 2024",
+      "link": "https://www.credly.com/badges/18648e0a-0207-4683-a19f-616ae8b0e491/public_url"
+    },
+    {
+      "type": "Certificate",
+      "title": "Statistics for Data Science with Python",
+      "issuer": "IBM",
+      "date": "December 2024",
+      "link": "https://coursera.org/share/c95fe5146f1a554f42d4904bf02d6cb5"
+    },
+    {
+      "type": "Certificate",
+      "title": "What is Data Science?",
+      "issuer": "IBM",
+      "date": "December 2024",
+      "link": "https://coursera.org/share/b23e5ee7db5e541fcc3df644aec93937"
+    },
+    {
+      "type": "Certificate",
+      "title": "A Crash Course in Data Science",
+      "issuer": "Johns Hopkins University",
+      "date": "December 2024",
+      "link": "https://coursera.org/share/69e3c3d894310cf74b7617f8d4529c89"
+    },
+    {
+      "type": "Certificate",
+      "title": "Python for Data Science, AI and Development",
+      "issuer": "IBM",
+      "date": "December 2024",
+      "link": "https://coursera.org/share/c53df5662b7f40d0da5dd2555dcf614b"
+    },
+    {
+      "type": "Certification",
+      "title": "CompTIA IT Fundamentals+ (ITF+)",
+      "issuer": "CompTIA",
+      "date": "July 2024",
+      "link": "https://www.credly.com/badges/c151b700-c95c-4e88-bc54-143a4604daec/public_url"
+    }
+  ],
   "blogs": [
     {
       "id": "b1",
-      "title": "Building Scalable ETL Pipelines with Python",
-      "category": "Data Engineering",
-      "date": "2024-11-15",
+      "title": "My Practicum Experience at PetroEnergy",
+      "category": "Internship",
+      "date": "2025-07-01",
       "readTime": "8 min",
-      "excerpt": "A deep-dive into designing fault-tolerant ETL systems using Python, Airflow, and PostgreSQL for enterprise-scale data workflows.",
-      "tags": ["Python", "ETL", "Data Engineering"],
-      "url": "#"
+      "excerpt": "During my practicum at PetroEnergy, I worked on several real-world projects, collaborated with a talented team, and learned a lot about modern web development. I was able to apply my skills in React, JavaScript, and UI/UX design to deliver impactful solutions.",
+      "tags": ["Internship", "Web Development", "UI/UX", "Data Warehousing", "Data Management"],
+      "headerImage": "https://pbs.twimg.com/media/GvfcavDakAIXeFN?format=jpg&name=large",
+      "fullContent": "Overview of the Company\n\nPetroEnergy Resources Corporation (PERC) is a Philippine-based, publicly-listed energy company actively engaged in petroleum exploration, power generation, and the development of renewable energy sources such as geothermal, solar, and wind. The company is committed to aligning its operations with Environmental, Social, and Governance (ESG) principles as part of its broader mission to support sustainable development. In recent years, PetroEnergy has taken significant steps toward digital transformation, particularly in improving how ESG and Corporate Social Responsibility (CSR) data are managed and reported. Recognizing the inefficiencies of manual, spreadsheet-based workflows, the company initiated the development of a centralized ESG data management platform known as ESGDash. This system aims to automate and streamline data collection, processing, visualization, and reporting, ultimately enabling more accurate, timely, and strategic decision-making across the organization.\n\nNature of Tasks\n\nI was primarily assigned to handle the energy dataset, which formed the foundation of one of the most critical modules within the ESGDash system. At the onset, I conducted research to evaluate the most suitable architecture for managing and organizing PetroEnergy's data. Through this, I recommended the adoption of the Medallion Architecture, which effectively structures data into Bronze (raw), Silver (cleansed), and Gold (analytics-ready) layers—providing clarity, traceability, and scalability. Over the span of three weeks, our team analyzed and organized the company's raw Excel files into a centralized and structured database. The next three weeks were dedicated to system development, where I took the lead on frontend development but also stepped into backend tasks when errors or integration issues arose. On the frontend, I created the repository section and dashboard for energy data, ensuring users could filter and view key performance indicators such as daily energy output, and CO₂ avoidance. Although only a single key value was required for data input, the backend calculations involved multiple logic layers to present comprehensive and accurate metrics. In addition, I developed admin functionalities, including user management and an audit trail system, which ensured secure access, role-based permissions, and traceability of user activities—supporting the governance and accountability principles of the ESG framework.\n\nTotal Hours Rendered\n\nOver the course of my practicum, I rendered a total of 400 hours from April 28, 2025 to July 9, 2025, extending beyond the initial 324-hour training plan to allow for additional development, integration, and quality assurance work. These hours were distributed across four structured phases: Project Setup and Data Familiarization, Data Modeling and System Design, System Development and Implementation, and Documentation and Training. Each phase provided opportunities to contribute to tasks such as requirements gathering, database design, API and frontend development, testing, and system handover. The extended timeline also gave me more room to support backend debugging, refine user interface features, and strengthen the system's security through administrative tools. This comprehensive engagement allowed me to apply both technical knowledge and critical thinking skills to deliver a system that addressed PetroEnergy's ESG data management challenges.\n\nConclusion / Reflection\n\nMy practicum experience at PetroEnergy Resources Corporation was a transformative period of both technical and personal growth. Working on a real-world system that directly supports sustainability and corporate responsibility allowed me to see the deeper value of software development beyond just writing code—it's about solving problems that matter. Through the ESGDash project, I gained firsthand experience in end-to-end system development, from data architecture planning to user interface implementation. I learned how important it is to think critically, collaborate effectively, and adapt quickly to real-world challenges. Being entrusted with key components like the energy data dashboard, repository structure, and admin functionalities not only strengthened my technical skills but also boosted my confidence to lead and make decisions in a professional setting. Most importantly, I realized that the systems we build can empower organizations to act more responsibly, efficiently, and transparently. This internship affirmed my passion for building purposeful technology and solidified my commitment to pursuing a career where I can contribute to meaningful, data-driven solutions that create positive impact.",
+      "externalLink": "https://drive.google.com/file/d/1nuEHlPQCTrEiKQ9KxVGJ_vDGlv5w8Pv0/view?usp=sharing",
+      "externalLinkText": "View Full Report",
+      "url": "https://drive.google.com/file/d/1nuEHlPQCTrEiKQ9KxVGJ_vDGlv5w8Pv0/view?usp=sharing",
+      "author": "Jelly Anne"
     },
     {
       "id": "b2",
-      "title": "From Zero to Dashboard: D3.js for Data Analysts",
-      "category": "Data Visualization",
-      "date": "2024-09-02",
-      "readTime": "12 min",
-      "excerpt": "A hands-on guide to creating beautiful, interactive data visualizations with D3.js—no design background required.",
-      "tags": ["D3.js", "Visualization", "JavaScript"],
-      "url": "#"
+      "title": "Attending Build with AI Manila 2025 – Gemini API & Google Gen AI SDK",
+      "category": "Events",
+      "date": "2025-05-01",
+      "readTime": "5 min",
+      "excerpt": "Attending Build with AI Manila 2025 was an inspiring hands-on experience. I worked with the Google Gen AI SDK and Gemini API in Google Colab, exploring real-world AI applications like RAG use cases and multimodal prompts.",
+      "tags": ["Google", "Gemini API", "Gen AI SDK", "AI Development", "Build with AI", "GDG Manila"],
+      "headerImage": "https://media.licdn.com/dms/image/v2/D5622AQEStu4RtlJS0w/feedshare-shrink_2048_1536/B56ZdPcRdmHEAo-/0/1749384502695?e=1755129600&v=beta&t=2rRozrW_NmO_Nz5t_KWELS_-lCW_iYdNFZfkNnfUUaM",
+      "fullContent": "Back-to-back AI events — and this one was hands-on, practical, and inspiring.\n\nI had the opportunity to attend Build with AI Manila 2025 hosted by Google Developer Groups Manila, and it was packed with real coding experiences using one of my favorite platforms — Google Colab!\n\nThis wasn't just about exploring AI concepts — it was about building with them. Using the Google Gen AI SDK and the Gemini API, we got to experiment with powerful tools and models like Gemini 2.5 and the Multimodal Live API.\n\nSome highlights from my hands-on session:\n- Sent text and multimodal prompts (text + image + audio)\n- Generated real-time outputs, including voice responses\n- Built a simple RAG (Retrieval-Augmented Generation) use case for retail\n- Explored function calling, system instructions, token management, and more\n- Played with Gemini 2.5 Flash for native audio dialogs and affective conversation\n\nWorking directly in Colab made everything smooth and familiar — it's always been one of my favorite tools for quickly testing ideas, coding, and data analysis, as well as collaboration.\n\nI was also excited to finally see Bryl Lim in person. I've learned a lot from his videos on developing with AI and joining hackathons, so it was really cool to be in the same space and see the community come together.\n\nIt amazes me how far AI tools have come — and how accessible they've become for developers. Huge thanks to GDG Manila for the opportunity to learn, build, and connect with fellow developers.",
+      "url": "#",
+      "author": "Jelly Anne"
     },
     {
       "id": "b3",
-      "title": "The Hidden Power of SQL Window Functions",
-      "category": "SQL",
-      "date": "2024-07-18",
-      "readTime": "6 min",
-      "excerpt": "Unlock advanced analytics directly in SQL using window functions—LAG, LEAD, RANK, and beyond.",
-      "tags": ["SQL", "Analytics", "PostgreSQL"],
-      "url": "#"
-    },
-    {
-      "id": "b4",
-      "title": "Fine-tuning BERT for Domain-Specific NLP",
-      "category": "Machine Learning",
-      "date": "2024-05-05",
-      "readTime": "15 min",
-      "excerpt": "Step-by-step walkthrough of fine-tuning a BERT model on custom datasets for sentiment classification tasks.",
-      "tags": ["NLP", "BERT", "Python", "ML"],
-      "url": "#"
-    },
-    {
-      "id": "b5",
-      "title": "Vanilla JS Architecture Patterns That Scale",
-      "category": "Web Development",
-      "date": "2024-03-22",
-      "readTime": "10 min",
-      "excerpt": "You don't always need a framework. Explore MVC, component-based, and event-driven patterns in plain JavaScript.",
-      "tags": ["JavaScript", "Architecture", "Web Dev"],
-      "url": "#"
-    },
-    {
-      "id": "b6",
-      "title": "My Data Analyst Toolkit in 2024",
-      "category": "Tools",
-      "date": "2024-01-10",
+      "title": "Attending Microsoft's Season of AI – Azure AI Agent Service",
+      "category": "Events",
+      "date": "2025-05-30",
       "readTime": "5 min",
-      "excerpt": "A curated list of the tools, libraries, and practices I rely on daily as a data analyst and developer.",
-      "tags": ["Tools", "Productivity", "Data"],
-      "url": "#"
+      "excerpt": "Attending Microsoft's Season of AI event was a transformative experience. I learned how generative agents are built using Azure AI and Chainlit, gaining hands-on exposure to real-world applications of AI.",
+      "tags": ["Microsoft", "Azure AI", "AI Agents", "Generative AI", "Chainlit"],
+      "headerImage": "https://media.licdn.com/dms/image/v2/D5622AQGAPpVrocDMhw/feedshare-shrink_1280/B56ZcpR81lGsAk-/0/1748744261606?e=1755129600&v=beta&t=U54Ky0vPFimdooYeKoDW8ZArKZ1bF5FTYWr0ssEw8HE",
+      "fullContent": "Last Friday, May 30, I had the opportunity to attend the 'Microsoft Season of AI – Azure AI Agent Service' event at the Microsoft Office in Makati, along with fellow computer science students. The session focused on building Generative Agents using Azure AI and deploying them with Chainlit — and it was truly an eye-opening experience, especially since it was my first time attending such an event.\n\nComing in with only a foundational understanding of Generative AI, I was eager to learn more and curious about what the session would offer. By the end, I had gained invaluable insights — especially on how AI agents are developed from the ground up. Until then, my experience was mostly limited to AI prompting, so seeing the step-by-step process of building agents using Azure's tools was incredibly enlightening.\n\nWatching powerful platforms like Azure AI Foundry and Chainlit in action made the entire development process feel much more accessible and exciting. It helped me see the practical applications of generative AI and the massive potential it holds in solving real-world problems.\n\nOne of the biggest takeaways for me was this reminder: You don't need to be an expert to start exploring AI — curiosity and a willingness to learn are what truly matter. This mindset helped me better understand complex concepts and sparked my excitement to continue exploring this rapidly evolving field.\n\nA huge thank you to Sir Ziggy Zulueta for delivering such an engaging and beginner-friendly session. Your clear and inspiring explanations made advanced topics much easier to grasp.\n\nOverall, I'm incredibly grateful for the experience and excited to keep diving deeper into the world of AI.",
+      "url": "#",
+      "author": "Jelly Anne"
     }
-  ]
+  ],
+  "contacts": {
+    "email": "jellyannekayemallari@gmail.com",
+    "phone": "+63 912 345 6789",
+    "location": "Laguna, Philippines"
+  }
 }
