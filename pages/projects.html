@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — JAKM Portfolio</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+  <canvas id="galaxy-canvas"></canvas>
+  <div class="nebula-bg"></div>
+  <div class="site-wrapper">
+    <div id="nav-placeholder"></div>
+    <main class="page-wrapper">
+      <header class="page-header">
+        <p class="page-eyebrow">✦ 01 — Projects</p>
+        <h1 class="page-title">What I've<br><span style="color:var(--accent-cyan)">Built</span></h1>
+        <p class="page-subtitle">A collection of projects spanning data analytics, machine learning, and full-stack web development.</p>
+        <div class="page-divider"></div>
+      </header>
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Data Analytics">Data Analytics</button>
+        <button class="filter-btn" data-filter="Machine Learning">Machine Learning</button>
+        <button class="filter-btn" data-filter="Web Development">Web Development</button>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <div class="card shimmer" style="min-height:280px"></div>
+        <div class="card shimmer" style="min-height:280px"></div>
+        <div class="card shimmer" style="min-height:280px"></div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p class="footer-text">© 2024 Jelly Anne Kaye Mallari</p>
+      <div class="footer-links">
+        <a href="../index.html">← Dashboard</a>
+        <a href="../admin/admin.html">Admin</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-close">✕</button>
+    <a href="../index.html">Dashboard</a>
+    <a href="projects.html" style="color:var(--accent-cyan)">Projects</a>
+    <a href="experience.html">Experience</a>
+    <a href="skills.html">Skills</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+  </div>
+
+  <script type="module">
+    import { GalaxyAnimation } from '../assets/js/animations.js';
+    import DataStore from '../assets/js/dataStore.js';
+    import UI from '../assets/js/ui.js';
+    import ContactForm from '../assets/js/contactForm.js';
+
+    GalaxyAnimation.init();
+    ContactForm.init();
+
+    // Inline nav
+    document.getElementById('nav-placeholder').innerHTML = `
+      <nav class="nav" id="main-nav">
+        <div class="nav-logo" onclick="location.href='../index.html'" style="cursor:pointer">JAK<span>M</span></div>
+        <ul class="nav-links">
+          <li><a href="../index.html">Dashboard</a></li>
+          <li><a href="projects.html" style="color:var(--accent-cyan)">Projects</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="#" class="nav-cta contact-trigger">Contact</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </nav>
+    `;
+    document.getElementById('hamburger')?.addEventListener('click', () => document.getElementById('mobile-nav')?.classList.add('open'));
+    document.getElementById('mobile-close')?.addEventListener('click', () => document.getElementById('mobile-nav')?.classList.remove('open'));
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (nav) nav.style.background = window.scrollY > 40 ? 'rgba(4,5,13,0.95)' : 'rgba(4,5,13,0.7)';
+    });
+
+    let allProjects = [];
+    let currentFilter = 'all';
+
+    function renderProjects(projects) {
+      const grid = document.getElementById('projects-grid');
+      if (!projects.length) {
+        grid.innerHTML = `<p style="color:var(--star-dim);font-family:var(--font-mono);font-size:0.82rem;grid-column:1/-1;text-align:center;padding:60px 0">No projects found in this category.</p>`;
+        return;
+      }
+      grid.innerHTML = projects.map(p => `
+        <div class="project-card reveal">
+          ${p.featured ? `<div style="position:absolute;top:20px;right:20px"><span class="tag accent">Featured</span></div>` : ''}
+          <div class="project-category">${UI.esc(p.category)}</div>
+          <h3 class="project-title">${UI.esc(p.title)}</h3>
+          <p class="project-desc">${UI.esc(p.description)}</p>
+          <div class="project-tech">
+            ${(p.tech || []).map(t => `<span class="tech-tag">${UI.esc(t)}</span>`).join('')}
+          </div>
+          <div class="project-footer">
+            <div class="project-status">
+              <span class="status-indicator ${p.status === 'In Progress' ? 'in-progress' : ''}"></span>
+              ${UI.esc(p.status)} · ${p.year}
+            </div>
+            <div class="project-links">
+              ${p.github && p.github !== '#' ? `<a href="${p.github}" target="_blank">GitHub ↗</a>` : `<a href="#">GitHub ↗</a>`}
+              ${p.demo && p.demo !== '#' ? `<a href="${p.demo}" target="_blank">Demo ↗</a>` : `<a href="#">Demo ↗</a>`}
+            </div>
+          </div>
+        </div>
+      `).join('');
+      UI.initScrollReveal();
+    }
+
+    function applyFilter(filter) {
+      currentFilter = filter;
+      const filtered = filter === 'all' ? allProjects : allProjects.filter(p => p.category === filter);
+      renderProjects(filtered);
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+    }
+
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      if (e.target.classList.contains('filter-btn')) {
+        applyFilter(e.target.dataset.filter);
+      }
+    });
+
+    DataStore.getSection('projects').then(projects => {
+      allProjects = projects || [];
+      applyFilter('all');
+    });
+  </script>
+</body>
+</html>

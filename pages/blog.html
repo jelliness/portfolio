@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — JAKM Portfolio</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+  <canvas id="galaxy-canvas"></canvas>
+  <div class="nebula-bg"></div>
+  <div class="site-wrapper">
+    <div id="nav-placeholder"></div>
+    <main class="page-wrapper">
+      <header class="page-header">
+        <p class="page-eyebrow">✦ 04 — Blog</p>
+        <h1 class="page-title">Thoughts &<br><span style="color:var(--accent-violet)">Writing</span></h1>
+        <p class="page-subtitle">Articles on data engineering, analytics, and development practices.</p>
+        <div class="page-divider" style="background:linear-gradient(90deg,var(--accent-violet),transparent)"></div>
+      </header>
+      <div class="blog-grid" id="blog-grid"></div>
+    </main>
+    <footer class="footer">
+      <p class="footer-text">© 2024 Jelly Anne Kaye Mallari</p>
+      <div class="footer-links"><a href="../index.html">← Dashboard</a></div>
+    </footer>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-close">✕</button>
+    <a href="../index.html">Dashboard</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Experience</a>
+    <a href="skills.html">Skills</a>
+    <a href="blog.html" style="color:var(--accent-cyan)">Blog</a>
+    <a href="about.html">About</a>
+  </div>
+  <script type="module">
+    import { GalaxyAnimation } from '../assets/js/animations.js';
+    import DataStore from '../assets/js/dataStore.js';
+    import UI from '../assets/js/ui.js';
+    import ContactForm from '../assets/js/contactForm.js';
+    
+    GalaxyAnimation.init();
+    ContactForm.init();
+    
+    document.getElementById('nav-placeholder').innerHTML = `
+      <nav class="nav" id="main-nav">
+        <div class="nav-logo" onclick="location.href='../index.html'" style="cursor:pointer">JAK<span>M</span></div>
+        <ul class="nav-links">
+          <li><a href="../index.html">Dashboard</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="blog.html" style="color:var(--accent-cyan)">Blog</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="#" class="nav-cta contact-trigger">Contact</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </nav>
+    `;
+    document.getElementById('hamburger')?.addEventListener('click', () => document.getElementById('mobile-nav')?.classList.add('open'));
+    document.getElementById('mobile-close')?.addEventListener('click', () => document.getElementById('mobile-nav')?.classList.remove('open'));
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (nav) nav.style.background = window.scrollY > 40 ? 'rgba(4,5,13,0.95)' : 'rgba(4,5,13,0.7)';
+    });
+
+    DataStore.getSection('blogs').then(blogs => {
+      const grid = document.getElementById('blog-grid');
+      grid.innerHTML = (blogs || []).map((b, i) => `
+        <a href="${b.url || '#'}" class="blog-card reveal" style="transition-delay:${i * 0.1}s;display:block">
+          <div class="blog-category">${UI.esc(b.category)}</div>
+          <h3 class="blog-title">${UI.esc(b.title)}</h3>
+          <p class="blog-excerpt">${UI.esc(b.excerpt)}</p>
+          <div class="blog-tags">
+            ${(b.tags || []).map(t => `<span class="blog-tag">${UI.esc(t)}</span>`).join('')}
+          </div>
+          <div class="blog-meta">
+            <span>${UI.formatDate(b.date)}</span>
+            <span>${UI.esc(b.readTime)} read</span>
+          </div>
+        </a>
+      `).join('');
+      UI.initScrollReveal();
+    });
+  </script>
+</body>
+</html>

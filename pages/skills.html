@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills — JAKM Portfolio</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+</head>
+<body>
+  <canvas id="galaxy-canvas"></canvas>
+  <div class="nebula-bg"></div>
+  <div class="site-wrapper">
+    <div id="nav-placeholder"></div>
+    <main class="page-wrapper">
+      <header class="page-header">
+        <p class="page-eyebrow">✦ 03 — Skills</p>
+        <h1 class="page-title">Tools of the<br><span style="color:var(--accent-cyan)">Trade</span></h1>
+        <p class="page-subtitle">Technologies, frameworks, and tools I wield to build and analyze.</p>
+        <div class="page-divider"></div>
+      </header>
+      <div class="skills-sections" id="skills-container"></div>
+    </main>
+    <footer class="footer">
+      <p class="footer-text">© 2024 Jelly Anne Kaye Mallari</p>
+      <div class="footer-links"><a href="../index.html">← Dashboard</a></div>
+    </footer>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" id="mobile-close">✕</button>
+    <a href="../index.html">Dashboard</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience.html">Experience</a>
+    <a href="skills.html" style="color:var(--accent-cyan)">Skills</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+  </div>
+  <script type="module">
+    import { GalaxyAnimation } from '../assets/js/animations.js';
+    import DataStore from '../assets/js/dataStore.js';
+    import UI from '../assets/js/ui.js';
+    import ContactForm from '../assets/js/contactForm.js';
+    
+    GalaxyAnimation.init();
+    ContactForm.init();
+    
+    document.getElementById('nav-placeholder').innerHTML = `
+      <nav class="nav" id="main-nav">
+        <div class="nav-logo" onclick="location.href='../index.html'" style="cursor:pointer">JAK<span>M</span></div>
+        <ul class="nav-links">
+          <li><a href="../index.html">Dashboard</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="skills.html" style="color:var(--accent-cyan)">Skills</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="#" class="nav-cta contact-trigger">Contact</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </nav>
+    `;
+    document.getElementById('hamburger')?.addEventListener('click', () => document.getElementById('mobile-nav')?.classList.add('open'));
+    document.getElementById('mobile-close')?.addEventListener('click', () => document.getElementById('mobile-nav')?.classList.remove('open'));
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (nav) nav.style.background = window.scrollY > 40 ? 'rgba(4,5,13,0.95)' : 'rgba(4,5,13,0.7)';
+    });
+
+    const icons = {
+      languages: '{ }', frameworks: '⚙', data: '📊', databases: '🗃', tools: '🛠'
+    };
+    const colors = {
+      languages: 'var(--accent-cyan)',
+      frameworks: 'var(--accent-violet)',
+      data: 'var(--accent-gold)',
+      databases: 'var(--accent-rose)',
+      tools: 'var(--accent-cyan)',
+    };
+
+    DataStore.getSection('skills').then(skills => {
+      const container = document.getElementById('skills-container');
+      container.innerHTML = Object.entries(skills || {}).map(([key, items]) => `
+        <div class="skills-group reveal">
+          <div class="skills-group-title" style="color:${colors[key] || 'var(--accent-cyan)'}">${icons[key] || '★'} ${key.charAt(0).toUpperCase() + key.slice(1)}</div>
+          <div class="skills-list">
+            ${items.map(s => `<span class="skill-pill">${UI.esc(s)}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+      UI.initScrollReveal();
+    });
+  </script>
+</body>
+</html>

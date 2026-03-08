@@ -1,0 +1,210 @@
+{
+  "profile": {
+    "name": "Jelly Anne Kaye Mallari",
+    "title": "Developer & Data Analyst",
+    "tagline": "Turning data into stories, code into experiences.",
+    "email": "jellyannekaymallari@email.com",
+    "github": "https://github.com/jellymallari",
+    "linkedin": "https://linkedin.com/in/jellymallari",
+    "resumeUrl": "#",
+    "bio": "I'm a developer and data analyst passionate about building elegant digital solutions and uncovering insights from complex datasets. I bridge the gap between engineering and analytics—creating systems that are as insightful as they are functional.",
+    "location": "Philippines",
+    "available": true
+  },
+  "stats": {
+    "projects": 18,
+    "experience": 4,
+    "technologies": 24,
+    "blogs": 12
+  },
+  "projects": [
+    {
+      "id": "p1",
+      "title": "Stellar Analytics Dashboard",
+      "category": "Data Analytics",
+      "description": "An interactive dashboard for visualizing large-scale astronomical datasets using D3.js and Python. Processes over 1M data points in real-time.",
+      "tech": ["Python", "D3.js", "PostgreSQL", "FastAPI"],
+      "status": "Completed",
+      "year": 2024,
+      "featured": true,
+      "github": "#",
+      "demo": "#",
+      "image": ""
+    },
+    {
+      "id": "p2",
+      "title": "NLP Sentiment Pipeline",
+      "category": "Machine Learning",
+      "description": "End-to-end NLP pipeline for real-time social media sentiment analysis. Achieved 94% accuracy using fine-tuned transformer models.",
+      "tech": ["Python", "HuggingFace", "Kafka", "Docker"],
+      "status": "Completed",
+      "year": 2024,
+      "featured": true,
+      "github": "#",
+      "demo": "#",
+      "image": ""
+    },
+    {
+      "id": "p3",
+      "title": "DevTrack — Task Manager",
+      "category": "Web Development",
+      "description": "Full-stack project management tool with real-time collaboration features, built for development teams.",
+      "tech": ["Node.js", "React", "MongoDB", "Socket.io"],
+      "status": "In Progress",
+      "year": 2024,
+      "featured": false,
+      "github": "#",
+      "demo": "#",
+      "image": ""
+    },
+    {
+      "id": "p4",
+      "title": "Supply Chain Optimizer",
+      "category": "Data Analytics",
+      "description": "ML-powered supply chain optimization tool that reduced operational costs by 23% for a logistics company.",
+      "tech": ["Python", "scikit-learn", "Tableau", "SQL"],
+      "status": "Completed",
+      "year": 2023,
+      "featured": true,
+      "github": "#",
+      "demo": "#",
+      "image": ""
+    },
+    {
+      "id": "p5",
+      "title": "Galaxia — Portfolio Template",
+      "category": "Web Development",
+      "description": "Open-source space-themed portfolio template with modular architecture and admin panel.",
+      "tech": ["HTML", "CSS", "JavaScript"],
+      "status": "Completed",
+      "year": 2023,
+      "featured": false,
+      "github": "#",
+      "demo": "#",
+      "image": ""
+    },
+    {
+      "id": "p6",
+      "title": "Weather Pattern Predictor",
+      "category": "Machine Learning",
+      "description": "LSTM-based model predicting regional weather patterns 7 days ahead with 88% accuracy.",
+      "tech": ["TensorFlow", "Python", "Pandas", "Plotly"],
+      "status": "Completed",
+      "year": 2023,
+      "featured": false,
+      "github": "#",
+      "demo": "#",
+      "image": ""
+    }
+  ],
+  "experience": [
+    {
+      "id": "e1",
+      "role": "Data Analyst",
+      "company": "TechCorp Solutions",
+      "period": "2023 – Present",
+      "type": "Full-time",
+      "description": "Lead data analyst responsible for building ETL pipelines, dashboards, and predictive models for business intelligence.",
+      "highlights": [
+        "Built automated reporting system saving 20 hrs/week",
+        "Designed ML model improving customer retention by 15%",
+        "Led team of 3 junior analysts"
+      ]
+    },
+    {
+      "id": "e2",
+      "role": "Junior Web Developer",
+      "company": "Pixel Labs",
+      "period": "2022 – 2023",
+      "type": "Full-time",
+      "description": "Developed and maintained full-stack web applications for SME clients across various industries.",
+      "highlights": [
+        "Delivered 12+ client projects on schedule",
+        "Reduced load times by 40% via optimization",
+        "Introduced component-based architecture"
+      ]
+    },
+    {
+      "id": "e3",
+      "role": "Data Science Intern",
+      "company": "Analytics Hub",
+      "period": "2021 – 2022",
+      "type": "Internship",
+      "description": "Assisted senior data scientists in building models and cleaning large datasets for enterprise clients.",
+      "highlights": [
+        "Processed 500K+ rows of customer data",
+        "Built 3 predictive models from scratch",
+        "Authored internal documentation"
+      ]
+    }
+  ],
+  "skills": {
+    "languages": ["Python", "JavaScript", "SQL", "TypeScript", "R", "Bash"],
+    "frameworks": ["Node.js", "FastAPI", "Flask", "Express.js", "D3.js"],
+    "data": ["Pandas", "NumPy", "scikit-learn", "TensorFlow", "Tableau", "Power BI"],
+    "databases": ["PostgreSQL", "MongoDB", "MySQL", "Redis"],
+    "tools": ["Docker", "Git", "Linux", "Figma", "Jupyter", "VS Code"]
+  },
+  "blogs": [
+    {
+      "id": "b1",
+      "title": "Building Scalable ETL Pipelines with Python",
+      "category": "Data Engineering",
+      "date": "2024-11-15",
+      "readTime": "8 min",
+      "excerpt": "A deep-dive into designing fault-tolerant ETL systems using Python, Airflow, and PostgreSQL for enterprise-scale data workflows.",
+      "tags": ["Python", "ETL", "Data Engineering"],
+      "url": "#"
+    },
+    {
+      "id": "b2",
+      "title": "From Zero to Dashboard: D3.js for Data Analysts",
+      "category": "Data Visualization",
+      "date": "2024-09-02",
+      "readTime": "12 min",
+      "excerpt": "A hands-on guide to creating beautiful, interactive data visualizations with D3.js—no design background required.",
+      "tags": ["D3.js", "Visualization", "JavaScript"],
+      "url": "#"
+    },
+    {
+      "id": "b3",
+      "title": "The Hidden Power of SQL Window Functions",
+      "category": "SQL",
+      "date": "2024-07-18",
+      "readTime": "6 min",
+      "excerpt": "Unlock advanced analytics directly in SQL using window functions—LAG, LEAD, RANK, and beyond.",
+      "tags": ["SQL", "Analytics", "PostgreSQL"],
+      "url": "#"
+    },
+    {
+      "id": "b4",
+      "title": "Fine-tuning BERT for Domain-Specific NLP",
+      "category": "Machine Learning",
+      "date": "2024-05-05",
+      "readTime": "15 min",
+      "excerpt": "Step-by-step walkthrough of fine-tuning a BERT model on custom datasets for sentiment classification tasks.",
+      "tags": ["NLP", "BERT", "Python", "ML"],
+      "url": "#"
+    },
+    {
+      "id": "b5",
+      "title": "Vanilla JS Architecture Patterns That Scale",
+      "category": "Web Development",
+      "date": "2024-03-22",
+      "readTime": "10 min",
+      "excerpt": "You don't always need a framework. Explore MVC, component-based, and event-driven patterns in plain JavaScript.",
+      "tags": ["JavaScript", "Architecture", "Web Dev"],
+      "url": "#"
+    },
+    {
+      "id": "b6",
+      "title": "My Data Analyst Toolkit in 2024",
+      "category": "Tools",
+      "date": "2024-01-10",
+      "readTime": "5 min",
+      "excerpt": "A curated list of the tools, libraries, and practices I rely on daily as a data analyst and developer.",
+      "tags": ["Tools", "Productivity", "Data"],
+      "url": "#"
+    }
+  ]
+}

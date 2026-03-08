@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — JAKM Portfolio</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <style>
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(241,196,15,0.1);
+      border: 1px solid rgba(241,196,15,0.2);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent-gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .count-badge {
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: rgba(100,255,218,0.1);
+      border: 1px solid rgba(100,255,218,0.15);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--accent-cyan);
+      margin-left: 8px;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--star-dim);
+    }
+    .danger-zone {
+      margin-top: 40px;
+      padding: 24px;
+      border: 1px solid rgba(255,107,157,0.15);
+      border-radius: var(--radius);
+      background: rgba(255,107,157,0.03);
+    }
+    .danger-zone h3 {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent-rose);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .danger-zone p {
+      font-size: 0.8rem;
+      color: var(--star-dim);
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="galaxy-canvas"></canvas>
+  <div class="nebula-bg"></div>
+  <div class="site-wrapper">
+    <nav class="nav" id="main-nav">
+      <div class="nav-logo" onclick="location.href='../index.html'" style="cursor:pointer">JAK<span>M</span></div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span class="admin-badge">⚙ Admin Panel</span>
+        <a href="../index.html" style="font-family:var(--font-mono);font-size:0.72rem;color:var(--star-dim);letter-spacing:0.06em">← Portfolio</a>
+      </div>
+    </nav>
+
+    <main class="page-wrapper">
+      <header class="page-header">
+        <p class="page-eyebrow">⚙ Admin</p>
+        <h1 class="page-title">Mission<br><span style="color:var(--accent-gold)">Control</span></h1>
+        <p class="page-subtitle">Manage your portfolio content — add, edit, or remove entries without touching source code.</p>
+        <div class="page-divider" style="background:linear-gradient(90deg,var(--accent-gold),transparent)"></div>
+      </header>
+
+      <div class="admin-layout">
+        <!-- Sidebar -->
+        <nav class="admin-sidebar">
+          <div class="admin-sidebar-title">Sections</div>
+          <div class="admin-nav-item active" data-panel="projects">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Projects <span class="count-badge" id="cnt-projects">0</span>
+          </div>
+          <div class="admin-nav-item" data-panel="blogs">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Blog Posts <span class="count-badge" id="cnt-blogs">0</span>
+          </div>
+          <div class="admin-nav-item" data-panel="experience">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            Experience <span class="count-badge" id="cnt-experience">0</span>
+          </div>
+          <div class="admin-nav-item" data-panel="skills">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Skills <span class="count-badge" id="cnt-skills">0</span>
+          </div>
+          <div class="admin-nav-item" data-panel="profile">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Profile
+          </div>
+          <div class="admin-nav-item" data-panel="settings" style="margin-top:24px;border-top:1px solid rgba(255,255,255,0.05);padding-top:16px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M20 12h2M2 12h2M17.66 17.66l-1.41-1.41M6.34 17.66l1.41-1.41"/></svg>
+            Settings
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+
+          <!-- PROJECTS PANEL -->
+          <div class="admin-panel active" id="panel-projects">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title">Projects</h2>
+              <button class="btn btn-primary" id="add-project-btn" onclick="AdminApp.openForm('projects')">+ Add Project</button>
+            </div>
+            <div id="project-form-wrapper">
+              <div class="admin-form" id="project-form">
+                <h3 style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:24px" id="project-form-title">New Project</h3>
+                <input type="hidden" id="project-edit-id" />
+                <div class="form-grid">
+                  <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="p-title" placeholder="Project title" /></div>
+                  <div class="form-group"><label class="form-label">Category</label>
+                    <select class="form-select" id="p-category">
+                      <option>Data Analytics</option>
+                      <option>Machine Learning</option>
+                      <option>Web Development</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group full"><label class="form-label">Description</label><textarea class="form-textarea" id="p-description" placeholder="Project description"></textarea></div>
+                  <div class="form-group"><label class="form-label">Technologies (comma-separated)</label><input class="form-input" id="p-tech" placeholder="Python, React, SQL" /></div>
+                  <div class="form-group"><label class="form-label">Status</label>
+                    <select class="form-select" id="p-status"><option>Completed</option><option>In Progress</option><option>Planned</option></select>
+                  </div>
+                  <div class="form-group"><label class="form-label">Year</label><input class="form-input" id="p-year" type="number" placeholder="2024" /></div>
+                  <div class="form-group"><label class="form-label">GitHub URL</label><input class="form-input" id="p-github" placeholder="https://github.com/..." /></div>
+                  <div class="form-group"><label class="form-label">Demo URL</label><input class="form-input" id="p-demo" placeholder="https://..." /></div>
+                  <div class="form-group" style="flex-direction:row;align-items:center;gap:10px">
+                    <input type="checkbox" id="p-featured" style="width:16px;height:16px;accent-color:var(--accent-cyan)" />
+                    <label class="form-label" for="p-featured" style="margin:0">Featured project</label>
+                  </div>
+                </div>
+                <div class="form-actions">
+                  <button class="btn btn-primary" onclick="AdminApp.saveProject()">Save Project</button>
+                  <button class="btn btn-outline" onclick="AdminApp.closeForm('project-form')">Cancel</button>
+                </div>
+              </div>
+            </div>
+            <table class="admin-table" id="projects-table">
+              <thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Year</th><th>Actions</th></tr></thead>
+              <tbody id="projects-tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- BLOGS PANEL -->
+          <div class="admin-panel" id="panel-blogs">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title">Blog Posts</h2>
+              <button class="btn btn-primary" onclick="AdminApp.openForm('blogs')">+ Add Post</button>
+            </div>
+            <div class="admin-form" id="blog-form">
+              <h3 style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:24px" id="blog-form-title">New Blog Post</h3>
+              <input type="hidden" id="blog-edit-id" />
+              <div class="form-grid">
+                <div class="form-group full"><label class="form-label">Title</label><input class="form-input" id="b-title" placeholder="Post title" /></div>
+                <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="b-category" placeholder="Data Engineering" /></div>
+                <div class="form-group"><label class="form-label">Read Time</label><input class="form-input" id="b-readtime" placeholder="8 min" /></div>
+                <div class="form-group"><label class="form-label">Date</label><input class="form-input" id="b-date" type="date" /></div>
+                <div class="form-group"><label class="form-label">URL</label><input class="form-input" id="b-url" placeholder="https://..." /></div>
+                <div class="form-group full"><label class="form-label">Excerpt</label><textarea class="form-textarea" id="b-excerpt" placeholder="Short description of the post"></textarea></div>
+                <div class="form-group full"><label class="form-label">Tags (comma-separated)</label><input class="form-input" id="b-tags" placeholder="Python, Data, ETL" /></div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" onclick="AdminApp.saveBlog()">Save Post</button>
+                <button class="btn btn-outline" onclick="AdminApp.closeForm('blog-form')">Cancel</button>
+              </div>
+            </div>
+            <table class="admin-table">
+              <thead><tr><th>Title</th><th>Category</th><th>Date</th><th>Read Time</th><th>Actions</th></tr></thead>
+              <tbody id="blogs-tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- EXPERIENCE PANEL -->
+          <div class="admin-panel" id="panel-experience">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title">Experience</h2>
+              <button class="btn btn-primary" onclick="AdminApp.openForm('experience')">+ Add Entry</button>
+            </div>
+            <div class="admin-form" id="experience-form">
+              <h3 style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:24px">Experience Entry</h3>
+              <input type="hidden" id="exp-edit-id" />
+              <div class="form-grid">
+                <div class="form-group"><label class="form-label">Role</label><input class="form-input" id="e-role" placeholder="Data Analyst" /></div>
+                <div class="form-group"><label class="form-label">Company</label><input class="form-input" id="e-company" placeholder="Company Name" /></div>
+                <div class="form-group"><label class="form-label">Period</label><input class="form-input" id="e-period" placeholder="2023 – Present" /></div>
+                <div class="form-group"><label class="form-label">Type</label>
+                  <select class="form-select" id="e-type"><option>Full-time</option><option>Part-time</option><option>Internship</option><option>Freelance</option></select>
+                </div>
+                <div class="form-group full"><label class="form-label">Description</label><textarea class="form-textarea" id="e-description" placeholder="Role description"></textarea></div>
+                <div class="form-group full"><label class="form-label">Highlights (one per line)</label><textarea class="form-textarea" id="e-highlights" placeholder="Built X that achieved Y&#10;Led team of N"></textarea></div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" onclick="AdminApp.saveExperience()">Save Entry</button>
+                <button class="btn btn-outline" onclick="AdminApp.closeForm('experience-form')">Cancel</button>
+              </div>
+            </div>
+            <table class="admin-table">
+              <thead><tr><th>Role</th><th>Company</th><th>Period</th><th>Type</th><th>Actions</th></tr></thead>
+              <tbody id="experience-tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- SKILLS PANEL -->
+          <div class="admin-panel" id="panel-skills">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title">Skills</h2>
+              <button class="btn btn-primary" onclick="AdminApp.saveSkills()">Save All Skills</button>
+            </div>
+            <div class="admin-form visible" id="skills-form" style="display:block">
+              <p style="font-size:0.85rem;color:var(--star-dim);margin-bottom:24px">Manage your skills by category. Add skills separated by commas.</p>
+              <div class="form-grid">
+                <div class="form-group full">
+                  <label class="form-label">💻 Programming Languages</label>
+                  <input class="form-input" id="s-languages" placeholder="Python, JavaScript, TypeScript, SQL, R" />
+                  <small style="font-size:0.7rem;color:var(--star-dim);margin-top:4px">Languages you code in</small>
+                </div>
+                <div class="form-group full">
+                  <label class="form-label">⚡ Frameworks & Libraries</label>
+                  <input class="form-input" id="s-frameworks" placeholder="React, Node.js, FastAPI, Flask, Express.js" />
+                  <small style="font-size:0.7rem;color:var(--star-dim);margin-top:4px">Frameworks and libraries you use</small>
+                </div>
+                <div class="form-group full">
+                  <label class="form-label">📊 Data & Analytics</label>
+                  <input class="form-input" id="s-data" placeholder="Pandas, NumPy, scikit-learn, Tableau, Power BI" />
+                  <small style="font-size:0.7rem;color:var(--star-dim);margin-top:4px">Data science and analytics tools</small>
+                </div>
+                <div class="form-group full">
+                  <label class="form-label">🗄️ Databases</label>
+                  <input class="form-input" id="s-databases" placeholder="PostgreSQL, MongoDB, MySQL, Redis" />
+                  <small style="font-size:0.7rem;color:var(--star-dim);margin-top:4px">Database systems you work with</small>
+                </div>
+                <div class="form-group full">
+                  <label class="form-label">🛠️ Tools & Technologies</label>
+                  <input class="form-input" id="s-tools" placeholder="Docker, Git, Linux, Figma, VS Code" />
+                  <small style="font-size:0.7rem;color:var(--star-dim);margin-top:4px">Dev tools and technologies</small>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top:32px;padding:20px;border:1px solid rgba(100,255,218,0.1);border-radius:var(--radius);background:rgba(100,255,218,0.02)">
+              <h3 style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent-cyan);letter-spacing:0.1em;margin-bottom:12px">📋 CURRENT SKILLS SUMMARY</h3>
+              <div id="skills-preview" style="font-size:0.8rem;color:var(--star-dim);line-height:1.7"></div>
+            </div>
+          </div>
+
+          <!-- PROFILE PANEL -->
+          <div class="admin-panel" id="panel-profile">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title">Profile</h2>
+            </div>
+            <div class="admin-form visible" id="profile-form" style="display:block">
+              <div class="form-grid">
+                <div class="form-group"><label class="form-label">Full Name</label><input class="form-input" id="prof-name" /></div>
+                <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="prof-title" /></div>
+                <div class="form-group full"><label class="form-label">Bio</label><textarea class="form-textarea" id="prof-bio" style="min-height:120px"></textarea></div>
+                <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="prof-email" type="email" /></div>
+                <div class="form-group"><label class="form-label">Location</label><input class="form-input" id="prof-location" /></div>
+                <div class="form-group"><label class="form-label">GitHub URL</label><input class="form-input" id="prof-github" /></div>
+                <div class="form-group"><label class="form-label">LinkedIn URL</label><input class="form-input" id="prof-linkedin" /></div>
+                <div class="form-group"><label class="form-label">Resume URL</label><input class="form-input" id="prof-resume" /></div>
+                <div class="form-group" style="flex-direction:row;align-items:center;gap:10px">
+                  <input type="checkbox" id="prof-available" style="width:16px;height:16px;accent-color:var(--accent-cyan)" />
+                  <label class="form-label" for="prof-available" style="margin:0">Available for opportunities</label>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" onclick="AdminApp.saveProfile()">Save Profile</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SETTINGS PANEL -->
+          <div class="admin-panel" id="panel-settings">
+            <div class="admin-panel-header">
+              <h2 class="admin-panel-title">Settings</h2>
+            </div>
+            <div class="danger-zone">
+              <h3>⚠ Danger Zone</h3>
+              <p>Reset all portfolio data back to the default sample content. This cannot be undone.</p>
+              <button class="btn btn-outline" style="border-color:rgba(255,107,157,0.3);color:var(--accent-rose)" onclick="AdminApp.resetData()">Reset to Defaults</button>
+            </div>
+            <div style="margin-top:24px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px">
+              <h3 style="font-family:var(--font-mono);font-size:0.72rem;color:var(--star-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Data Export</h3>
+              <p style="font-size:0.8rem;color:var(--star-dim);margin-bottom:16px">Export your current portfolio data as JSON.</p>
+              <button class="btn btn-outline" onclick="AdminApp.exportData()">Export JSON</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { GalaxyAnimation } from '../assets/js/animations.js';
+    import DataStore from '../assets/js/dataStore.js';
+    import UI from '../assets/js/ui.js';
+
+    GalaxyAnimation.init();
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (nav) nav.style.background = window.scrollY > 40 ? 'rgba(4,5,13,0.95)' : 'rgba(4,5,13,0.7)';
+    });
+
+    // Panel navigation
+    document.querySelectorAll('.admin-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const panel = item.dataset.panel;
+        document.querySelectorAll('.admin-nav-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+        item.classList.add('active');
+        document.getElementById(`panel-${panel}`)?.classList.add('active');
+      });
+    });
+
+    // ── AdminApp ──────────────────────────────────
+    window.AdminApp = {
+      openForm(type) {
+        const formIds = { projects: 'project-form', blogs: 'blog-form', experience: 'experience-form' };
+        const form = document.getElementById(formIds[type]);
+        if (!form) return;
+        form.classList.add('visible');
+        form.style.display = 'block';
+        form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Reset
+        if (type === 'projects') {
+          document.getElementById('project-form-title').textContent = 'New Project';
+          document.getElementById('project-edit-id').value = '';
+          ['p-title','p-description','p-tech','p-github','p-demo'].forEach(id => document.getElementById(id).value = '');
+          document.getElementById('p-year').value = new Date().getFullYear();
+          document.getElementById('p-featured').checked = false;
+        } else if (type === 'blogs') {
+          document.getElementById('blog-form-title').textContent = 'New Blog Post';
+          document.getElementById('blog-edit-id').value = '';
+          ['b-title','b-category','b-readtime','b-date','b-url','b-excerpt','b-tags'].forEach(id => document.getElementById(id).value = '');
+        } else if (type === 'experience') {
+          ['e-role','e-company','e-period','e-description','e-highlights'].forEach(id => document.getElementById(id).value = '');
+          document.getElementById('exp-edit-id').value = '';
+        }
+      },
+
+      closeForm(formId) {
+        const form = document.getElementById(formId);
+        if (form) { form.classList.remove('visible'); form.style.display = 'none'; }
+      },
+
+      async saveProject() {
+        const id = document.getElementById('project-edit-id').value;
+        const item = {
+          title: document.getElementById('p-title').value.trim(),
+          category: document.getElementById('p-category').value,
+          description: document.getElementById('p-description').value.trim(),
+          tech: document.getElementById('p-tech').value.split(',').map(t => t.trim()).filter(Boolean),
+          status: document.getElementById('p-status').value,
+          year: parseInt(document.getElementById('p-year').value) || new Date().getFullYear(),
+          github: document.getElementById('p-github').value.trim() || '#',
+          demo: document.getElementById('p-demo').value.trim() || '#',
+          featured: document.getElementById('p-featured').checked,
+        };
+        if (!item.title) { UI.toast('Title is required', 'error'); return; }
+        if (id) { await DataStore.updateItem('projects', id, item); UI.toast('Project updated!'); }
+        else { await DataStore.addItem('projects', item); UI.toast('Project added!'); }
+        this.closeForm('project-form');
+        this.loadProjects();
+      },
+
+      async saveBlog() {
+        const id = document.getElementById('blog-edit-id').value;
+        const item = {
+          title: document.getElementById('b-title').value.trim(),
+          category: document.getElementById('b-category').value.trim(),
+          readTime: document.getElementById('b-readtime').value.trim(),
+          date: document.getElementById('b-date').value,
+          url: document.getElementById('b-url').value.trim() || '#',
+          excerpt: document.getElementById('b-excerpt').value.trim(),
+          tags: document.getElementById('b-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+        };
+        if (!item.title) { UI.toast('Title is required', 'error'); return; }
+        if (id) { await DataStore.updateItem('blogs', id, item); UI.toast('Post updated!'); }
+        else { await DataStore.addItem('blogs', item); UI.toast('Post added!'); }
+        this.closeForm('blog-form');
+        this.loadBlogs();
+      },
+
+      async saveExperience() {
+        const id = document.getElementById('exp-edit-id').value;
+        const item = {
+          role: document.getElementById('e-role').value.trim(),
+          company: document.getElementById('e-company').value.trim(),
+          period: document.getElementById('e-period').value.trim(),
+          type: document.getElementById('e-type').value,
+          description: document.getElementById('e-description').value.trim(),
+          highlights: document.getElementById('e-highlights').value.split('\n').map(h => h.trim()).filter(Boolean),
+        };
+        if (!item.role) { UI.toast('Role is required', 'error'); return; }
+        if (id) { await DataStore.updateItem('experience', id, item); UI.toast('Experience updated!'); }
+        else { await DataStore.addItem('experience', item); UI.toast('Experience added!'); }
+        this.closeForm('experience-form');
+        this.loadExperience();
+      },
+
+      async saveProfile() {
+        const updates = {
+          name: document.getElementById('prof-name').value.trim(),
+          title: document.getElementById('prof-title').value.trim(),
+          bio: document.getElementById('prof-bio').value.trim(),
+          email: document.getElementById('prof-email').value.trim(),
+          location: document.getElementById('prof-location').value.trim(),
+          github: document.getElementById('prof-github').value.trim(),
+          linkedin: document.getElementById('prof-linkedin').value.trim(),
+          resumeUrl: document.getElementById('prof-resume').value.trim(),
+          available: document.getElementById('prof-available').checked,
+        };
+        await DataStore.updateProfile(updates);
+        UI.toast('Profile saved!');
+      },
+
+      async saveSkills() {
+        const parseSkills = (str) => str.split(',').map(s => s.trim()).filter(Boolean);
+        const skillsData = {
+          languages: parseSkills(document.getElementById('s-languages').value),
+          frameworks: parseSkills(document.getElementById('s-frameworks').value),
+          data: parseSkills(document.getElementById('s-data').value),
+          databases: parseSkills(document.getElementById('s-databases').value),
+          tools: parseSkills(document.getElementById('s-tools').value),
+        };
+        await DataStore.updateSkills(skillsData);
+        UI.toast('Skills updated!');
+        this.loadSkills();
+      },
+
+      async loadSkills() {
+        const skills = await DataStore.getSection('skills');
+        if (!skills) return;
+        
+        // Populate form fields
+        document.getElementById('s-languages').value = (skills.languages || []).join(', ');
+        document.getElementById('s-frameworks').value = (skills.frameworks || []).join(', ');
+        document.getElementById('s-data').value = (skills.data || []).join(', ');
+        document.getElementById('s-databases').value = (skills.databases || []).join(', ');
+        document.getElementById('s-tools').value = (skills.tools || []).join(', ');
+
+        // Update count badge
+        const total = (skills.languages?.length || 0) + 
+                     (skills.frameworks?.length || 0) + 
+                     (skills.data?.length || 0) + 
+                     (skills.databases?.length || 0) + 
+                     (skills.tools?.length || 0);
+        document.getElementById('cnt-skills').textContent = total;
+
+        // Update preview
+        const preview = document.getElementById('skills-preview');
+        const categories = [
+          { name: 'Languages', items: skills.languages, icon: '💻' },
+          { name: 'Frameworks', items: skills.frameworks, icon: '⚡' },
+          { name: 'Data & Analytics', items: skills.data, icon: '📊' },
+          { name: 'Databases', items: skills.databases, icon: '🗄️' },
+          { name: 'Tools', items: skills.tools, icon: '🛠️' }
+        ];
+        
+        preview.innerHTML = categories.map(cat => {
+          const items = cat.items || [];
+          return items.length > 0 
+            ? `<div style="margin-bottom:8px"><strong>${cat.icon} ${cat.name}:</strong> ${items.join(', ')}</div>`
+            : '';
+        }).join('');
+      },
+
+      editProject(id) {
+        DataStore.getSection('projects').then(projects => {
+          const p = projects.find(x => x.id === id);
+          if (!p) return;
+          this.openForm('projects');
+          document.getElementById('project-form-title').textContent = 'Edit Project';
+          document.getElementById('project-edit-id').value = p.id;
+          document.getElementById('p-title').value = p.title;
+          document.getElementById('p-category').value = p.category;
+          document.getElementById('p-description').value = p.description;
+          document.getElementById('p-tech').value = (p.tech || []).join(', ');
+          document.getElementById('p-status').value = p.status;
+          document.getElementById('p-year').value = p.year;
+          document.getElementById('p-github').value = p.github || '';
+          document.getElementById('p-demo').value = p.demo || '';
+          document.getElementById('p-featured').checked = !!p.featured;
+        });
+      },
+
+      editBlog(id) {
+        DataStore.getSection('blogs').then(blogs => {
+          const b = blogs.find(x => x.id === id);
+          if (!b) return;
+          this.openForm('blogs');
+          document.getElementById('blog-form-title').textContent = 'Edit Post';
+          document.getElementById('blog-edit-id').value = b.id;
+          document.getElementById('b-title').value = b.title;
+          document.getElementById('b-category').value = b.category;
+          document.getElementById('b-readtime').value = b.readTime;
+          document.getElementById('b-date').value = b.date;
+          document.getElementById('b-url').value = b.url || '';
+          document.getElementById('b-excerpt').value = b.excerpt;
+          document.getElementById('b-tags').value = (b.tags || []).join(', ');
+        });
+      },
+
+      editExperience(id) {
+        DataStore.getSection('experience').then(exp => {
+          const e = exp.find(x => x.id === id);
+          if (!e) return;
+          this.openForm('experience');
+          document.getElementById('exp-edit-id').value = e.id;
+          document.getElementById('e-role').value = e.role;
+          document.getElementById('e-company').value = e.company;
+          document.getElementById('e-period').value = e.period;
+          document.getElementById('e-type').value = e.type;
+          document.getElementById('e-description').value = e.description;
+          document.getElementById('e-highlights').value = (e.highlights || []).join('\n');
+        });
+      },
+
+      async deleteItem(section, id, label) {
+        if (!UI.confirm(`Delete "${label}"? This cannot be undone.`)) return;
+        await DataStore.deleteItem(section, id);
+        UI.toast(`"${label}" deleted`);
+        if (section === 'projects') this.loadProjects();
+        else if (section === 'blogs') this.loadBlogs();
+        else if (section === 'experience') this.loadExperience();
+      },
+
+      async loadProjects() {
+        const projects = await DataStore.getSection('projects');
+        const tbody = document.getElementById('projects-tbody');
+        document.getElementById('cnt-projects').textContent = projects?.length || 0;
+        if (!projects?.length) { tbody.innerHTML = `<tr><td colspan="5" class="empty-state">No projects yet. Add one above.</td></tr>`; return; }
+        tbody.innerHTML = projects.map(p => `
+          <tr>
+            <td>${UI.esc(p.title)} ${p.featured ? '<span class="tag accent" style="font-size:0.6rem">Featured</span>' : ''}</td>
+            <td>${UI.esc(p.category)}</td>
+            <td><span style="color:${p.status==='Completed'?'var(--accent-cyan)':'var(--accent-gold)'}">${UI.esc(p.status)}</span></td>
+            <td>${p.year}</td>
+            <td style="display:flex;gap:8px">
+              <button class="action-btn action-btn-edit" onclick="AdminApp.editProject('${p.id}')">Edit</button>
+              <button class="action-btn action-btn-delete" onclick="AdminApp.deleteItem('projects','${p.id}','${UI.esc(p.title)}')">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      },
+
+      async loadBlogs() {
+        const blogs = await DataStore.getSection('blogs');
+        const tbody = document.getElementById('blogs-tbody');
+        document.getElementById('cnt-blogs').textContent = blogs?.length || 0;
+        if (!blogs?.length) { tbody.innerHTML = `<tr><td colspan="5" class="empty-state">No blog posts yet.</td></tr>`; return; }
+        tbody.innerHTML = blogs.map(b => `
+          <tr>
+            <td>${UI.esc(b.title)}</td>
+            <td>${UI.esc(b.category)}</td>
+            <td>${UI.formatDate(b.date)}</td>
+            <td>${UI.esc(b.readTime)}</td>
+            <td style="display:flex;gap:8px">
+              <button class="action-btn action-btn-edit" onclick="AdminApp.editBlog('${b.id}')">Edit</button>
+              <button class="action-btn action-btn-delete" onclick="AdminApp.deleteItem('blogs','${b.id}','${UI.esc(b.title)}')">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      },
+
+      async loadExperience() {
+        const exp = await DataStore.getSection('experience');
+        const tbody = document.getElementById('experience-tbody');
+        document.getElementById('cnt-experience').textContent = exp?.length || 0;
+        if (!exp?.length) { tbody.innerHTML = `<tr><td colspan="5" class="empty-state">No experience entries yet.</td></tr>`; return; }
+        tbody.innerHTML = exp.map(e => `
+          <tr>
+            <td>${UI.esc(e.role)}</td>
+            <td>${UI.esc(e.company)}</td>
+            <td>${UI.esc(e.period)}</td>
+            <td>${UI.esc(e.type)}</td>
+            <td style="display:flex;gap:8px">
+              <button class="action-btn action-btn-edit" onclick="AdminApp.editExperience('${e.id}')">Edit</button>
+              <button class="action-btn action-btn-delete" onclick="AdminApp.deleteItem('experience','${e.id}','${UI.esc(e.role)}')">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      },
+
+      async loadProfile() {
+        const profile = await DataStore.getSection('profile');
+        if (!profile) return;
+        document.getElementById('prof-name').value = profile.name || '';
+        document.getElementById('prof-title').value = profile.title || '';
+        document.getElementById('prof-bio').value = profile.bio || '';
+        document.getElementById('prof-email').value = profile.email || '';
+        document.getElementById('prof-location').value = profile.location || '';
+        document.getElementById('prof-github').value = profile.github || '';
+        document.getElementById('prof-linkedin').value = profile.linkedin || '';
+        document.getElementById('prof-resume').value = profile.resumeUrl || '';
+        document.getElementById('prof-available').checked = !!profile.available;
+      },
+
+      async resetData() {
+        if (!UI.confirm('Reset ALL data to defaults? This cannot be undone.')) return;
+        await DataStore.resetToDefault();
+        UI.toast('Data reset to defaults');
+        this.loadAll();
+      },
+
+      async exportData() {
+        const data = await DataStore.getData();
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'portfolio-data.json'; a.click();
+        URL.revokeObjectURL(url);
+        UI.toast('Data exported!');
+      },
+
+      loadAll() {
+        this.loadProjects();
+        this.loadBlogs();
+        this.loadExperience();
+        this.loadSkills();
+        this.loadProfile();
+      }
+    };
+
+    AdminApp.loadAll();
+  </script>
+</body>
+</html>

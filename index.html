@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jelly Anne Kaye Mallari — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+<canvas id="gc"></canvas>
+<div class="nb"></div>
+
+<div class="screen">
+  <div class="grid" id="grid"></div>
+</div>
+
+<script type="module">
+import DataStore from './assets/js/dataStore.js';
+import UI from './assets/js/ui.js';
+import ContactForm from './assets/js/contactForm.js';
+
+/* ══════════════════════════════════════════════
+   GALAXY CANVAS — stars, nebula, shooting stars
+══════════════════════════════════════════════ */
+(function () {
+  const cv = document.getElementById('gc');
+  const cx = cv.getContext('2d');
+  let stars = [], shots = [];
+  const COLS = ['#ffffff','#e8eaff','#c8d0ff','#64ffda','#bd93f9'];
+
+  function resize() {
+    cv.width = innerWidth; cv.height = innerHeight;
+    stars = [];
+    for (let i = 0; i < 320; i++) stars.push({
+      x: Math.random() * cv.width,  y: Math.random() * cv.height,
+      r: Math.random() * 1.5 + 0.2,
+      col: COLS[Math.floor(Math.random() * COLS.length)],
+      op: Math.random() * .7 + .15,
+      spd: Math.random() * .007 + .002,
+      dir: Math.random() > .5 ? 1 : -1
+    });
+  }
+
+  function shoot() {
+    if (Math.random() > .4) return;
+    const a = Math.PI / 6 + Math.random() * Math.PI / 8;
+    shots.push({ x: Math.random() * cv.width * .85, y: Math.random() * cv.height * .4,
+      spd: Math.random() * 11 + 7, len: Math.random() * 150 + 70, a, life: 1 });
+  }
+
+  function frame() {
+    cx.clearRect(0, 0, cv.width, cv.height);
+
+    /* soft nebula blobs */
+    [{ x: cv.width*.75, y: cv.height*.2,  r: 240, c: '100,255,218', a: .02  },
+     { x: cv.width*.1,  y: cv.height*.7,  r: 280, c: '189,147,249', a: .018 },
+     { x: cv.width*.5,  y: cv.height,     r: 200, c: '100,255,218', a: .013 }
+    ].forEach(n => {
+      const g = cx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      g.addColorStop(0, `rgba(${n.c},${n.a})`); g.addColorStop(1, 'transparent');
+      cx.save(); cx.fillStyle = g; cx.beginPath(); cx.arc(n.x, n.y, n.r, 0, Math.PI*2); cx.fill(); cx.restore();
+    });
+
+    /* twinkling stars */
+    stars.forEach(s => {
+      s.op += s.spd * s.dir;
+      if (s.op >= .85 || s.op <= .08) s.dir *= -1;
+      cx.save(); cx.globalAlpha = s.op;
+      cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, Math.PI*2); cx.fillStyle = s.col; cx.fill();
+      if (s.r > 1.1) {
+        cx.globalAlpha = s.op * .22;
+        const g = cx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 3);
+        g.addColorStop(0, s.col); g.addColorStop(1, 'transparent');
+        cx.fillStyle = g; cx.beginPath(); cx.arc(s.x, s.y, s.r*3, 0, Math.PI*2); cx.fill();
+      }
+      cx.restore();
+    });
+
+    /* shooting stars */
+    shots = shots.filter(s => s.life > 0);
+    shots.forEach(s => {
+      s.x += Math.cos(s.a) * s.spd; s.y += Math.sin(s.a) * s.spd; s.life -= .017;
+      const tx = s.x - Math.cos(s.a) * s.len, ty = s.y - Math.sin(s.a) * s.len;
+      cx.save(); cx.globalAlpha = s.life;
+      const g = cx.createLinearGradient(tx, ty, s.x, s.y);
+      g.addColorStop(0, 'transparent'); g.addColorStop(.6, 'rgba(200,210,255,.35)'); g.addColorStop(1, '#fff');
+      cx.strokeStyle = g; cx.lineWidth = 1.4;
+      cx.beginPath(); cx.moveTo(tx, ty); cx.lineTo(s.x, s.y); cx.stroke();
+      cx.globalAlpha = s.life * .7;
+      cx.beginPath(); cx.arc(s.x, s.y, 2, 0, Math.PI*2); cx.fillStyle = '#fff'; cx.fill();
+      cx.restore();
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  setInterval(shoot, 3000);
+  frame();
+})();
+
+/* ══════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════ */
+function ticker(items, dur = '22s') {
+  const inner = items.join('');
+  return `<div class="ticker-wrap"><div class="ticker-track" style="--tdur:${dur}">${inner}${inner}</div></div>`;
+}
+function projItem(p) {
+  return `<div class="ti-item"><span class="ti-dot"></span><span style="color:rgba(232,234,255,.8)">${UI.esc(p.title)}</span><span style="color:rgba(255,255,255,.18);padding:0 5px">·</span><span style="color:var(--cy);font-size:.58rem">${UI.esc(p.category)}</span></div>`;
+}
+function expItem(e) {
+  return `<div class="ti-item"><span class="ti-dot" style="background:var(--vi)"></span><span style="color:rgba(232,234,255,.8)">${UI.esc(e.role)}</span><span style="color:rgba(255,255,255,.18);padding:0 5px">@</span><span style="color:var(--vi);font-size:.58rem">${UI.esc(e.company)}</span></div>`;
+}
+const IC = {Python:'🐍',JavaScript:'⚡',TypeScript:'🔷',SQL:'🗄',R:'📊',Bash:'💻','Node.js':'🟢','FastAPI':'⚡','Flask':'🌶','Express.js':'🚀','D3.js':'📈',Pandas:'🐼',NumPy:'🔢','scikit-learn':'🤖',TensorFlow:'🧠',Tableau:'📊','Power BI':'📊',PostgreSQL:'🐘',MongoDB:'🍃',MySQL:'🐬',Redis:'🔴',Docker:'🐳',Git:'🌿',Linux:'🐧',Figma:'🎨',Jupyter:'📓'};
+function skillItem(s) {
+  return `<div class="ti-item"><span style="font-size:.9rem">${IC[s]||'◆'}</span><span class="ti-pill">${UI.esc(s)}</span></div>`;
+}
+function blogItem(b) {
+  const t = b.title.length > 44 ? b.title.slice(0, 42) + '…' : b.title;
+  return `<div class="ti-item"><span class="ti-dot" style="background:var(--vi)"></span><span style="color:rgba(232,234,255,.8)">${UI.esc(t)}</span><span style="color:var(--vi);font-size:.56rem;margin-left:5px">${UI.esc(b.readTime)}</span></div>`;
+}
+
+/* num-orbit widget — ring rotates, dot is a child so it orbits naturally */
+function numOrbit(val) {
+  return `<div class="num-orbit">
+    <div class="orb-ring"><div class="orb-dot"></div></div>
+    <span class="tile-num">${val}</span>
+  </div>`;
+}
+
+const ARR = `<div class="tile-arrow"></div>`;
+
+const GH = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`;
+const LI = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`;
+
+/* ══════════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════════ */
+async function render() {
+  const data = await DataStore.getData();
+  const { stats, projects, skills, blogs, experience, profile } = data;
+  const fp = projects.find(p => p.featured);
+  const allSkills = [
+    ...(skills.languages  || []),
+    ...(skills.frameworks || []),
+    ...(skills.data       || []).slice(0, 5),
+    ...(skills.databases  || []).slice(0, 3),
+    ...(skills.tools      || []).slice(0, 3)
+  ];
+
+  // Extract profile data with fallbacks
+  const profileName = profile?.name || 'Jelly Anne Kaye Mallari';
+  const nameParts = profileName.split(' ');
+  const firstName = nameParts.slice(0, -1).join(' ');
+  const lastName = nameParts[nameParts.length - 1];
+  const profileTitle = profile?.title || 'Developer & Data Analyst';
+  const profileTagline = profile?.tagline || 'code that speaks · data that tells stories';
+  const profileEmail = profile?.email || 'jellyannekaymallari@email.com';
+  const profileGithub = profile?.github || 'https://github.com/jellymallari';
+  const profileLinkedin = profile?.linkedin || 'https://linkedin.com/in/jellymallari';
+  const profileResume = profile?.resumeUrl || '#';
+  const availableStatus = profile?.available !== false;
+
+  document.getElementById('grid').innerHTML = `
+
+    <!-- ① IDENTITY — col 1, row 1–2 -->
+    <div class="tile t-identity">
+      <div class="id-planet"></div>
+
+      <div class="id-top">
+        <p class="id-eye">✦ ${UI.esc(profileTitle)}</p>
+        <h1 class="id-name">${UI.esc(firstName)}<br><span class="cy">${UI.esc(lastName)}</span></h1>
+        <p class="id-role">// ${UI.esc(profileTagline)}</p>
+        <div class="id-status"><div class="sdot"></div>${availableStatus ? 'Available for opportunities' : 'Not currently available'}</div>
+      </div>
+
+      <!-- single-row: About Me · Résumé · Get in Touch · GH · LI -->
+      <div class="id-bottom">
+        <a href="pages/about.html" class="id-btn ibg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          About Me
+        </a>
+        <a href="${profileResume}" class="id-btn ibo" ${profileResume !== '#' ? 'target="_blank"' : ''}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Résumé
+        </a>
+        <a href="#" class="id-btn ibp contact-trigger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Get in Touch
+        </a>
+        <a href="${profileGithub}" target="_blank" class="soc-btn" title="GitHub">${GH}</a>
+        <a href="${profileLinkedin}" target="_blank" class="soc-btn" title="LinkedIn">${LI}</a>
+      </div>
+    </div>
+
+    <!-- ② PROJECTS — col 2, row 1 -->
+    <a href="pages/projects.html" class="tile t-projects">
+      <div class="tile-top">
+        <div>
+          <div class="tile-label">Portfolio</div>
+          <div class="tile-title">Projects</div>
+          <div class="tile-sub">${fp ? UI.esc(fp.title) : 'Full-stack · ML · Analytics'}</div>
+        </div>
+        ${numOrbit(stats.projects)}
+      </div>
+      ${ticker(projects.map(projItem), '26s')}
+      ${ARR}
+    </a>
+
+    <!-- ③ SKILLS — col 3, row 1 -->
+    <a href="pages/skills.html" class="tile t-skills">
+      <div class="tile-top">
+        <div>
+          <div class="tile-label">Expertise</div>
+          <div class="tile-title">Skills</div>
+          <div class="tile-sub">Languages &amp; tools</div>
+        </div>
+        ${numOrbit(stats.technologies)}
+      </div>
+      ${ticker(allSkills.map(skillItem), '28s')}
+      ${ARR}
+    </a>
+
+    <!-- ④ EXPERIENCE — col 2, row 2 -->
+    <a href="pages/experience.html" class="tile t-exp">
+      <div class="tile-top">
+        <div>
+          <div class="tile-label">Career</div>
+          <div class="tile-title">Experience</div>
+          <div class="tile-sub">Years of growth</div>
+        </div>
+        ${numOrbit(stats.experience)}
+      </div>
+      ${ticker(experience.map(expItem), '20s')}
+      ${ARR}
+    </a>
+
+    <!-- ⑤ BLOG — col 3, row 2 -->
+    <a href="pages/blog.html" class="tile t-blog">
+      <div class="tile-top">
+        <div>
+          <div class="tile-label">Writing</div>
+          <div class="tile-title">Blog</div>
+          <div class="tile-sub">Articles &amp; deep-dives</div>
+        </div>
+        ${numOrbit(stats.blogs)}
+      </div>
+      ${ticker(blogs.map(blogItem), '24s')}
+      ${ARR}
+    </a>
+
+  `;
+}
+
+/* ----------------------------------------------
+   RENDER & INITIALIZE
+---------------------------------------------- */
+render().then(() => {
+  // Initialize contact form
+  ContactForm.init();
+});
+</script>
+</body>
+</html>
